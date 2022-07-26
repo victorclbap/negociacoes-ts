@@ -4,6 +4,7 @@ export class Negociacoes {
         // indica que é um array de negociacoes
         this.negociacoes = [];
     }
+    // private negociacoes: Negociacao[] = [];
     adiciona(negociacao) {
         this.negociacoes.push(negociacao);
     }

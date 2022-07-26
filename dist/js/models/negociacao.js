@@ -1,9 +1,13 @@
 export class Negociacao {
-    // no momento que cria uma instancia, vai passar esses valores
-    constructor(data, quantidade, valor) {
-        this._data = data;
-        this._quantidade = quantidade;
-        this._valor = valor;
+    // atributos privados só podem ser alterados por metodos da propia classe
+    // private _data: Date;
+    // private _quantidade: number;
+    // private _valor: number;
+    // no momento que cria uma instancia, os valores sao atribuidos automaticamente ao atributo private
+    constructor(_data, _quantidade, _valor) {
+        this._data = _data;
+        this._quantidade = _quantidade;
+        this._valor = _valor;
     }
     // getter nao podem ter o mesmo nome da propiedade
     get data() {
