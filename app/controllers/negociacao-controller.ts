@@ -12,7 +12,6 @@ export class NegociacaoController {
   private negociacoesView = new NegociacoesView("#negociacoesView");
   private mensagemView = new MensagemView("#mensagemView");
 
-
   constructor() {
     this.inputData = document.querySelector("#data");
     this.inputQuantidade = document.querySelector("#quantidade");
@@ -21,8 +20,12 @@ export class NegociacaoController {
   }
 
   public adiciona(): void {
-    const negociacao = this.criaNegociacao();
-    // dia util, 0 = domingo, 6 = sabado
+    // cria negociacao a partir do metodo estatico onde passa por tratamento
+    const negociacao = Negociacao.criaDe(
+      this.inputData.value,
+      this.inputQuantidade.value,
+      this.inputValor.value
+    );
 
     if (!this.eDiaUtil(negociacao.data)) {
       this.mensagemView.update("Apenas negociações em dias úteis são aceitas");
@@ -31,28 +34,6 @@ export class NegociacaoController {
     this.negociacoes.adiciona(negociacao);
     this.atualizaView();
     this.limparFormulario();
-  }
-
-  private criaNegociacao(): Negociacao {
-    // para criar a data que queremos passa string no formato new Date('1111,11,11')
-    // mas ela vem no formato no value ('1111-11-11')
-    // encontra tudo o que é hífen
-    const exp = /-/g;
-    const data = new Date(this.inputData.value.replace(exp, ","));
-
-    const quantidade = parseInt(this.inputQuantidade.value);
-    const valor = parseFloat(this.inputValor.value);
-
-    return new Negociacao(
-      data,
-      quantidade,
-      valor
-
-      // todo input.value o retorno é uma string que precisa ser tratado
-      //   this.inputData.value,
-      //   this.inputQuantidade.value,
-      //   this.inputValor.value
-    );
   }
 
   private limparFormulario(): void {
@@ -70,6 +51,7 @@ export class NegociacaoController {
   }
 
   private eDiaUtil(data: Date) {
+    // dia util, 0 = domingo, 6 = sabado
     return data.getDay() > DiasDaSemana.DOMINGO && DiasDaSemana.SABADO;
   }
 }

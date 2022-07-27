@@ -22,4 +22,19 @@ export class Negociacao {
     get volume() {
         return this._quantidade * this._valor;
     }
+    // metodo estatico pode chamar diretamente da classe, sem precisar instancia
+    static criaDe(dataString, quantidadeString, valorString) {
+        // para criar a data que queremos passa string no formato new Date('1111,11,11')
+        // mas ela vem no formato no value ('1111-11-11')
+        // encontra tudo o que é hífen
+        const exp = /-/g;
+        const data = new Date(dataString.replace(exp, ","));
+        const quantidade = parseInt(quantidadeString);
+        const valor = parseFloat(valorString);
+        return new Negociacao(data, quantidade, valor);
+        // todo input.value o retorno é uma string que precisa ser tratado
+        //   this.inputData.value,
+        //   this.inputQuantidade.value,
+        //   this.inputValor.value
+    }
 }
