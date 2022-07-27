@@ -17,7 +17,7 @@ export class NegociacoesView extends View {
             .map((negociacao) => {
             return ` 
         <tr>
-            <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
+            <td>${this.formatar(negociacao.data)}</td>
             <td>${negociacao.quantidade}</td>
             <td>${negociacao.valor}</td>
         </tr>
@@ -36,5 +36,8 @@ export class NegociacoesView extends View {
         // recebe string que é convertida em elemento do dom
         const template = this.template(model);
         this.elemento.innerHTML = template;
+    }
+    formatar(data) {
+        return new Intl.DateTimeFormat().format(data);
     }
 }

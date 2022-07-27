@@ -3,7 +3,7 @@ import { View } from "./view.js";
 
 export class NegociacoesView extends View<Negociacoes> {
   //   metodo apenas para gerar template
-  template(model: Negociacoes): string {
+  protected template(model: Negociacoes): string {
     return `
     <table class = "table table-hover table-bordered">
      <thead>
@@ -19,7 +19,7 @@ export class NegociacoesView extends View<Negociacoes> {
        .map((negociacao) => {
          return ` 
         <tr>
-            <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
+            <td>${this.formatar(negociacao.data)}</td>
             <td>${negociacao.quantidade}</td>
             <td>${negociacao.valor}</td>
         </tr>
@@ -35,9 +35,13 @@ export class NegociacoesView extends View<Negociacoes> {
   }
 
   //   método para inserir o template no dom através do seletor
-  update(model: Negociacoes): void {
+  public update(model: Negociacoes): void {
     // recebe string que é convertida em elemento do dom
     const template = this.template(model);
     this.elemento.innerHTML = template;
+  }
+
+  private formatar(data: Date): string {
+    return new Intl.DateTimeFormat().format(data);
   }
 }
