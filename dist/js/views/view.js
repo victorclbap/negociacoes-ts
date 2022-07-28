@@ -1,13 +1,21 @@
-// herança para evitar repetição de código
-// herda de view o contrutor
-// abstract indica que não pode ser instanciada diretamente
-// <T> indica um generics, o tipo é definido pela classe filha
 export class View {
-    constructor(seletor) {
-        this.elemento = document.querySelector(seletor);
+  constructor(seletor, escapar) {
+    this.escapar = false;
+    const elemento = document.querySelector(seletor);
+    if (elemento) {
+      this.elemento = elemento;
+    } else {
+      throw Error(`Seletor ${seletor} não existe no DOM`);
     }
-    update(model) {
-        const template = this.template(model);
-        this.elemento.innerHTML = template;
+    if (escapar) {
+      this.escapar = escapar;
     }
+  }
+  update(model) {
+    let template = this.template(model);
+    if (this.escapar) {
+      template = template.replace(/<script>[\s\S]*?<\/script>/, "");
+    }
+    this.elemento.innerHTML = template;
+  }
 }

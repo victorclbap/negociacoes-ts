@@ -1,10 +1,10 @@
 export class NegociacoesView {
-    constructor(seletor) {
-        this.elemento = document.querySelector(seletor);
-    }
-    //   metodo apenas para gerar template
-    template(model) {
-        return `
+  constructor(seletor) {
+    this.elemento = document.querySelector(seletor);
+  }
+  //   metodo apenas para gerar template
+  template(model) {
+    return `
     <table class = "table table-hover table-bordered">
      <thead>
       <tr>
@@ -15,9 +15,9 @@ export class NegociacoesView {
      </thead>
      <tbody>
      ${model
-            .lista()
-            .map((negociacao) => {
-            return ` 
+       .lista()
+       .map((negociacao) => {
+         return ` 
         <tr>
             <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
             <td>${negociacao.quantidade}</td>
@@ -25,18 +25,18 @@ export class NegociacoesView {
         </tr>
         
         `;
-            // a data formata de acordo com o navegador da pessoa
-            // junta todos os elementos de um array em uma string e retorna esta string.
-        })
-            .join("")}
+         // a data formata de acordo com o navegador da pessoa
+         // junta todos os elementos de um array em uma string e retorna esta string.
+       })
+       .join("")}
      </tbody>
     </table>
     `;
-    }
-    //   método para inserir o template no dom através do seletor
-    update(model) {
-        // recebe string que é convertida em elemento do dom
-        const template = this.template(model);
-        this.elemento.innerHTML = template;
-    }
+  }
+  //   método para inserir o template no dom através do seletor
+  update(model) {
+    // recebe string que é convertida em elemento do dom
+    const template = this.template(model);
+    this.elemento.innerHTML = template;
+  }
 }
