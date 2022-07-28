@@ -54,6 +54,9 @@ export class NegociacaoController {
 
   private eDiaUtil(data: Date) {
     // dia util, 0 = domingo, 6 = sabado
-    return data.getDay() > DiasDaSemana.DOMINGO && DiasDaSemana.SABADO;
+    return (
+      data.getDay() > DiasDaSemana.DOMINGO &&
+      data.getDay() < DiasDaSemana.SABADO
+    );
   }
 }

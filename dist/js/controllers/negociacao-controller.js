@@ -38,6 +38,9 @@ export class NegociacaoController {
     this.mensagemView.update("Negociação adicionada com sucesso!");
   }
   eDiaUtil(data) {
-    return data.getDay() > DiasDaSemana.DOMINGO && DiasDaSemana.SABADO;
+    return (
+      data.getDay() > DiasDaSemana.DOMINGO &&
+      data.getDay() < DiasDaSemana.SABADO
+    );
   }
 }
